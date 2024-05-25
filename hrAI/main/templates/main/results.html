@@ -1,0 +1,18 @@
+{% extends "layouts/navbar.html" %}
+
+{% block title %}Results{% endblock %}
+
+{% block content %}
+    <h1>Candidates for {{ request.user.company.name }}</h1>
+    <ul>
+        {% for candidate in candidates %}
+            <li>
+                <strong>Name:</strong> {{ candidate.name }}<br>
+                <strong>Score:</strong> {{ candidate.score }}<br>
+                <strong>Passed:</strong> {% if candidate.score > 70 %} Yes {% else %} No {% endif %} <br>
+                <strong>Explanation:</strong> {{ candidate.explanation }}
+            </li>
+            <hr>
+        {% endfor %}
+    </ul>
+{% endblock %}

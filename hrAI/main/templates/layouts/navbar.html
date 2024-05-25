@@ -1,0 +1,56 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} MayhemDream {% endblock %}</title>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+
+    
+    {% block script %} {% endblock %}
+</head>
+<body>
+    
+
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'home_page' %}"> Hier AI </a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class='navbar-nav'>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'upload_files' %}">Upload CVs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'results' %}"> Job Profiles </a>
+                    </li>
+                </ul>
+            </div>
+            <ul class="navbar-nav ml-auto"> <!-- Добавлен ml-auto -->
+                <li class="nav-item">
+                    {% if user.is_authenticated %}
+                        {% if user.company %}
+                            <li class="nav-item"> <a class="nav-link" href="{% url 'company_detail' user.company.pk %}">Company</a> </li>
+                        {% endif %}
+                        <li class="nav-item"> <a class="nav-link" href="{% url 'logout' %}">Logout</a> </li>
+                    {% else %}
+                        <li class="nav-item"> <a class="nav-link" href="{% url 'login' %}">Login</a> </li>
+                        <li class="nav-item"> <a class="nav-link" href="{% url 'register' %}">Sign Up</a> </li>
+                    {% endif %}
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
+    
+    <div class="container mt-4">
+        {% block content %}
+        {% endblock %}      
+    </div>
+
+    {% bootstrap_javascript %}  
+</body>
+</html>
+

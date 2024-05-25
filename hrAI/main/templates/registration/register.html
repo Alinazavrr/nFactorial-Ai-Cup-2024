@@ -1,0 +1,14 @@
+{% extends 'layouts/navbar.html' %}
+
+{% load bootstrap5 %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+    <h1>Register</h1>
+    <form method="post" class="mt-4">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+{% endblock %}

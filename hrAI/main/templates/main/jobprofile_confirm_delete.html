@@ -1,0 +1,15 @@
+{% extends 'layouts/navbar.html' %}
+
+{% load bootstrap5 %}
+
+{% block title %}Delete Job Profile{% endblock %}
+
+{% block content %}
+    <h1>Delete Job Profile</h1>
+    <p>Are you sure you want to delete "{{ object.title }}"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a href="{% url 'jobprofile_detail' object.pk %}" class="btn btn-secondary">Cancel</a>
+    </form>
+{% endblock %}

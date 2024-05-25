@@ -1,0 +1,25 @@
+{% extends "layouts/navbar.html" %}
+
+{% load bootstrap5 %}
+
+{% block title %}Upload Resumes{% endblock %}
+
+{% block content %}
+    <h1>Upload Resumes for {{ request.user.company.name }}</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div>
+            <label for="position">Job Position:</label>
+            <input type="text" id="position" name="position" required>
+        </div>
+        <div>
+            <label for="description">Job Description:</label>
+            <textarea id="description" name="description" required></textarea>
+        </div>
+        <div>
+            <label for="resumes">Resumes:</label>
+            <input type="file" id="resumes" name="resumes" multiple required>
+        </div>
+        <button type="submit">Upload</button>
+    </form>
+{% endblock %}

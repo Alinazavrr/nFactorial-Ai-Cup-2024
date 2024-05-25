@@ -1,0 +1,13 @@
+{% extends 'layouts/navbar.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    <div class="jumbotron">
+        <h1 class="display-4">Welcome to My Site!</h1>
+        <p class="lead">This is a simple platform to manage company job profiles and candidates using AI.</p>
+        <hr class="my-4">
+        <p>Use the navigation bar to explore the functionalities. You can create, update, and manage companies and job profiles.</p>
+        <a class="btn btn-primary btn-lg" href="{% url 'company_list' %}" role="button">View Companies</a>
+    </div>
+{% endblock %}

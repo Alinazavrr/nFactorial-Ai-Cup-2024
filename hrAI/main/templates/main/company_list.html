@@ -1,0 +1,18 @@
+{% extends 'layouts/navbar.html' %}
+
+{% load bootstrap5 %}
+
+{% block title %}Company List{% endblock %}
+
+{% block content %}
+    <h1>Companies</h1>
+    <ul class="list-group mt-4">
+        {% for company in companies %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <a href="{% url 'company_detail' company.pk %}">{{ company.name }}</a>
+                <a href="{% url 'company_update' company.pk %}" class="btn btn-sm btn-secondary">Edit</a>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'company_create' %}" class="btn btn-primary mt-4">Create New Company</a>
+{% endblock %}
