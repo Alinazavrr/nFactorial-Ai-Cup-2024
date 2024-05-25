@@ -21,10 +21,10 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class='navbar-nav'>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'upload_files' %}">Upload CVs</a>
+                        <a class="nav-link" href="">Upload CVs</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'results' %}"> Job Profiles </a>
+                        <a class="nav-link" href=""> Job Profiles </a>
                     </li>
                 </ul>
             </div>
@@ -32,7 +32,7 @@
                 <li class="nav-item">
                     {% if user.is_authenticated %}
                         {% if user.company %}
-                            <li class="nav-item"> <a class="nav-link" href="{% url 'company_detail' user.company.pk %}">Company</a> </li>
+                            {% comment %} <li class="nav-item"> <a class="nav-link" href="{% url 'company_detail' user.company.pk %}">Company</a> </li> {% endcomment %}
                         {% endif %}
                         <li class="nav-item"> <a class="nav-link" href="{% url 'logout' %}">Logout</a> </li>
                     {% else %}

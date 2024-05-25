@@ -2,25 +2,27 @@
 
 {% load bootstrap5 %}
 
-{% block title %}Company Detail{% endblock %}
+{% block title %}{{ company.name }}{% endblock %}
 
 {% block content %}
-    <h1>{{ company.name }}</h1>
-    <p>{{ company.description }}</p>
+    <div class="container">
+        <h1>{{ company.name }}</h1>
+        <p>{{ company.description }}</p>
 
-    <a href="{% url 'company_update' company.pk %}" class="btn btn-secondary">Edit Company</a>
-    <form method="post" action="{% url 'company_delete' company.pk %}" class="mt-2">
-        {% csrf_token %}
-        <button type="submit" class="btn btn-danger">Delete Company</button>
-    </form>
+        <a href="{% url 'company_update' company.pk %}" class="btn btn-secondary">Edit Company</a>
+        <form method="post" action="{% url 'company_delete' company.pk %}" class="mt-2">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Delete Company</button>
+        </form>
 
-    <h2>Job Profiles</h2>
-    <a href="{% url 'jobprofile_create' company.pk %}" class="btn btn-primary mb-3">Create Job Profile</a>
-    <ul>
-        {% for jobprofile in jobprofiles %}
-            <li>
-                <a href="{% url 'jobprofile_detail' jobprofile.pk %}">{{ jobprofile.position }}</a>
-            </li>
-        {% endfor %}
-    </ul>
+        <h2>Job Profiles</h2>
+        <a href="{% url 'jobprofile_create' company.pk %}" class="btn btn-primary mb-3">Create Job Profile</a>
+        <ul class="list-group">
+            {% for jobprofile in jobprofiles %}
+                <li class="list-group-item">
+                    <a href="{% url 'jobprofile_detail' jobprofile.pk %}">{{ jobprofile.position }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
 {% endblock %}
