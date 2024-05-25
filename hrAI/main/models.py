@@ -7,12 +7,12 @@ class CustomUser(models.Model):
 
     def __str__(self):
         return self.name
-
+    
 # Модель для хранения информации о компаниях
 class Company(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField()
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)  # Связь с пользователями
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)  # Связь с пользователями
     culture_values = models.TextField(null=True, blank=True)
     website = models.URLField(null=True, blank=True)
     social_media_links = models.JSONField(null=True, blank=True, default=dict)  # Ссылки на соцсети
@@ -35,7 +35,7 @@ class JobPosting(models.Model):
 
 # Модель для хранения резюме кандидатов
 class Candidate(models.Model):
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)  # Свя
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)  # Свя
     resume = models.FileField(upload_to='resumes/')
     applied_jobs = models.ManyToManyField(JobPosting, through='Application')
     created_at = models.DateTimeField(auto_now_add=True)

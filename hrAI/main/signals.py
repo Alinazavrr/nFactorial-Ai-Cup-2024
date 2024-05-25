@@ -4,10 +4,10 @@ from .models import CustomUser
 from django.contrib.auth.models import User
 
 
-# @receiver(post_save, sender=User)
-# def create_custom_user(sender, instance, created, **kwargs):
-#     if created:
-#         CustomUser.objects.create(user=instance)
+@receiver(post_save, sender=User)
+def create_custom_user(sender, instance, created, **kwargs):
+    if created:
+        CustomUser.objects.create(user=instance)
 
 
 
