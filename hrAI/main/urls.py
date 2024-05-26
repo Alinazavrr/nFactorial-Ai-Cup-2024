@@ -2,27 +2,33 @@ from django.urls import path
 from .views import *
 
 urlpatterns = [
-    path('', HomePageView.as_view(), name='home_page'),
+    path('', HomePageView.as_view(), name='home'),
+    path('job/<int:job_id>/apply/', ApplyForJobView.as_view(), name='apply-for-job'),
+    path('feedback/', CandidateFeedbackListView.as_view(), name='candidate-feedback-list'),
+    path('company/applications/', CompanyApplicationsListView.as_view(), name='company-applications-list'),
+    path('job/<int:job_id>/applications/', JobPostingApplicationsListView.as_view(), name='jobposting-applications-list'),
 
     # user autentication
     path('login/', CustomLoginView.as_view(), name='login'),
     path('logout/', CustomLogoutView.as_view(), name='logout'),
     path('register/', RegisterView.as_view(), name='register'),
 
-    # upload files and quick results
-    # path('upload_files/', upload_files, name='upload_files'),
-    # path('results/', results, name='results'),
+    path('companies/', CompanyListView.as_view(), name='company-list'),
+    path('companies/<int:pk>/', CompanyDetailView.as_view(), name='company-detail'),
+    path('companies/new/', CompanyCreateView.as_view(), name='company-create'),
+    path('companies/<int:pk>/edit/', CompanyUpdateView.as_view(), name='company-update'),
+    path('companies/<int:pk>/delete/', CompanyDeleteView.as_view(), name='company-delete'),
+    path('company/job_postings/', CompanyJobPostingsListView.as_view(), name='company-job-postings-list'),
 
-    # companies
-    # path('companies/', CompanyListView.as_view(), name='company_list'),
-    # path('companies/new/', CompanyCreateView.as_view(), name='company_create'),
-    # path('companies/<int:pk>/', CompanyDetailView.as_view(), name='company_detail'),
-    # path('companies/<int:pk>/edit/', CompanyUpdateView.as_view(), name='company_update'),
-    # path('companies/<int:pk>/delete/', CompanyDeleteView.as_view(), name='company_delete'),
+    path('jobpostings/', JobPostingListView.as_view(), name='jobposting-list'),
+    path('jobpostings/<int:pk>/', JobPostingDetailView.as_view(), name='jobposting-detail'),
+    path('jobpostings/new/', JobPostingCreateView.as_view(), name='jobposting-create'),
+    path('jobpostings/<int:pk>/edit/', JobPostingUpdateView.as_view(), name='jobposting-update'),
+    path('jobpostings/<int:pk>/delete/', JobPostingDeleteView.as_view(), name='jobposting-delete'),
 
-    # job posting
-    # path('companies/<int:company_id>/jobprofiles/new/', JobProfileCreateView.as_view(), name='jobprofile_create'),
-    # path('jobprofiles/<int:pk>/edit/', JobProfileUpdateView.as_view(), name='jobprofile_update'),
-    # path('jobprofiles/<int:pk>/', JobProfileDetailView.as_view(), name='jobprofile_detail'),
-    # path('jobprofiles/<int:pk>/delete/', JobProfileDeleteView.as_view(), name='jobprofile_delete'),
+    path('candidates/', CandidateListView.as_view(), name='candidate-list'),
+    path('candidates/<int:pk>/', CandidateDetailView.as_view(), name='candidate-detail'),
+    path('candidates/new/', CandidateCreateView.as_view(), name='candidate-create'),
+    path('candidates/<int:pk>/edit/', CandidateUpdateView.as_view(), name='candidate-update'),
+    path('candidates/<int:pk>/delete/', CandidateDeleteView.as_view(), name='candidate-delete'),
 ]

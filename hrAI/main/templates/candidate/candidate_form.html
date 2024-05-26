@@ -1,0 +1,15 @@
+<!-- templates/candidate/candidate_form.html -->
+{% extends 'layouts/navbar.html' %}
+
+{% load bootstrap5 %}
+ 
+{% block title %}{{ view.object.pk|default:"Create" }} Candidate{% endblock %}
+
+{% block content %}
+<h1>{{ view.object.pk|default:"Create" }} Candidate</h1>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+{% endblock %}

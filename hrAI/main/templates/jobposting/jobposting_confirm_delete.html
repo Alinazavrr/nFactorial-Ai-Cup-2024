@@ -1,0 +1,15 @@
+<!-- templates/jobposting/jobposting_confirm_delete.html -->
+{% extends 'layouts/navbar.html' %}
+
+{% load bootstrap5 %}
+ 
+{% block title %}Delete {{ object.title }}{% endblock %}
+
+{% block content %}
+<h1>Are you sure you want to delete {{ object.title }}?</h1>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a href="{% url 'jobposting-detail' object.pk %}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}

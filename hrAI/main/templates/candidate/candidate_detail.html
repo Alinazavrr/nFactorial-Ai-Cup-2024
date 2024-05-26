@@ -1,0 +1,11 @@
+<!-- templates/candidate/candidate_detail.html -->
+{% extends 'layouts/navbar.html' %}
+
+{% load bootstrap5 %}
+ 
+{% block title %}{{ object.user.user.username }}{% endblock %}
+
+{% block content %}
+<h1>{{ object.user.user.username }}</h1>
+<p><strong>Resume:</strong> <a href="{{ object.resume.path }}" class="text-white" target="_blank">View Resume</a></p>
+{% endblock %}

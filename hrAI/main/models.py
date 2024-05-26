@@ -2,12 +2,22 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class CustomUser(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='custom_user')
+    ROLE_CHOICES = [
+        ('candidate', 'Candidate'),
+        ('company', 'Company'),
+    ]
+    role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='candidate')
     is_company = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.name
+        return self.user.username
     
+    def is_candidate(self):
+        return self.role == 'candidate'
+
+    def is_company(self):
+        return self.role == 'company'
 # Модель для хранения информации о компаниях
 class Company(models.Model):
     name = models.CharField(max_length=255)
@@ -42,12 +52,12 @@ class Candidate(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"{self.first_name} {self.last_name}"
+        return f"{self.user.user.username}"
 
 # Модель для хранения информации о заявках кандидатов на вакансии
 class Application(models.Model):
     candidate = models.ForeignKey(Candidate, on_delete=models.CASCADE)
-    job_posting = models.ForeignKey(JobPosting, on_delete=models.CASCADE)
+    job_posting = models.ForeignKey(JobPosting, on_delete=models.CASCADE, related_name='applications')
     status = models.CharField(max_length=50, choices=[
         ('applied', 'Applied'),
         ('under_review', 'Under Review'),

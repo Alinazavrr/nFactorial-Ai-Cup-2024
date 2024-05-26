@@ -1,0 +1,15 @@
+{% extends 'layouts/navbar.html' %}
+{% load bootstrap5 %}
+
+{% block title %}Создать Профиль Кандидата{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Создать Профиль Кандидата</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+    </form>
+</div>
+{% endblock %}

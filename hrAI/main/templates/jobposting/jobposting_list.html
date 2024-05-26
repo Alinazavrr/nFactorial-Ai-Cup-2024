@@ -1,0 +1,22 @@
+<!-- templates/jobposting/jobposting_list.html -->
+{% extends 'layouts/navbar.html' %}
+
+{% load bootstrap5 %}
+ 
+{% block title %}Job Postings{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Job Postings</h1>
+    {% if user.is_authenticated and user.custom_user.role == "company"%}
+        <a href="{% url 'jobposting-create' %}" class="btn btn-primary">Add New Job</a> 
+    {% endif%}  
+</div>
+<div class="list-group">
+    {% for jobposting in object_list %}
+    <a href="{% url 'jobposting-detail' jobposting.pk %}" class="list-group-item list-group-item-action bg-dark text-white">
+        {{ jobposting.title }} at {{ jobposting.company.name }}
+    </a>
+    {% endfor %}
+</div>
+{% endblock %}

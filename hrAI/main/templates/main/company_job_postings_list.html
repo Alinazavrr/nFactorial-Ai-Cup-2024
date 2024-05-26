@@ -1,0 +1,36 @@
+{% extends 'layouts/navbar.html' %}
+{% load bootstrap5 %}
+
+{% block title %}My Company Job Postings{% endblock %}
+
+{% block content %}
+  <div class="container mt-4">
+    <h2>My Company Job Postings</h2>
+    <table class="table table-dark table-striped">
+      <thead>
+        <tr>
+          <th scope="col">
+            <a href="?sort=title">Job Title</a>
+          </th>
+          <th scope="col">Description</th>
+          <th scope="col">
+            <a href="?sort=created_at">Date Created</a>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for job_posting in job_postings_list %}
+          <tr>
+            <td><a href="{% url 'jobposting-detail' job_posting.id %}">{{ job_posting.title }}</a></td>
+            <td>{{ job_posting.description }}</td>
+            <td>{{ job_posting.created_at }}</td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td colspan="3">No job postings available.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

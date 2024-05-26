@@ -1,56 +1,88 @@
 {% load static %}
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load bootstrap5 %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %} MayhemDream {% endblock %}</title>
-    {% load bootstrap5 %}
+    <title>{% block title %}My Project{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            text-align: center; /* Center all text elements */
+        }
 
-    
-    {% block script %} {% endblock %}
+        .navbar-container {
+            display: flex;
+            justify-content: center;
+            margin: 20px auto;
+        }
+        
+        .navbar {
+            width: auto; /* Auto width to fit content */
+            padding: 10px 20px;
+            border-radius: 15px;
+            background-color: #1f1f1f;
+        }
+        
+        .nav-link {
+            color: #ffffff !important;
+        }
+        
+        .navbar-brand {
+            color: #ffffff !important;
+        }
+        
+        .nav-link:hover {
+            color: #bbbbbb !important;
+        }
+        
+        .container {
+            text-align: left; /* Ensure content inside container is left-aligned */
+        }
+    </style>
 </head>
 <body>
-    
-
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="{% url 'home_page' %}"> Hier AI </a>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class='navbar-nav'>
-                    <li class="nav-item">
-                        <a class="nav-link" href="">Upload CVs</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href=""> Job Profiles </a>
-                    </li>
-                </ul>
-            </div>
-            <ul class="navbar-nav ml-auto"> <!-- Добавлен ml-auto -->
-                <li class="nav-item">
-                    {% if user.is_authenticated %}
-                        {% if user.company %}
-                            {% comment %} <li class="nav-item"> <a class="nav-link" href="{% url 'company_detail' user.company.pk %}">Company</a> </li> {% endcomment %}
+    <div class="navbar-container">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{% url 'home' %}"> Hier AI </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'jobposting-list' %}">Job Listings</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'company-list' %}">Companies</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'candidate-list' %}">Candidates</a>
+                        </li>
+                        <li class="nav-item ms-5"></li>
+                        {% if user.is_authenticated %}
+                            <li class="nav-item"> <a class="nav-link" href="{% url 'logout' %}"> Logout </a> </li>
+                        {% else %}
+                            <li class="nav-item"> <a class="nav-link" href="{% url 'login' %}">Login</a> </li>
+                            <li class="nav-item"> <a class="nav-link" href="{% url 'register' %}">Sign Up</a> </li>
                         {% endif %}
-                        <li class="nav-item"> <a class="nav-link" href="{% url 'logout' %}">Logout</a> </li>
-                    {% else %}
-                        <li class="nav-item"> <a class="nav-link" href="{% url 'login' %}">Login</a> </li>
-                        <li class="nav-item"> <a class="nav-link" href="{% url 'register' %}">Sign Up</a> </li>
-                    {% endif %}
-                </li>
-            </ul>
-        </div>
-    </nav>
-    
-    
-    <div class="container mt-4">
-        {% block content %}
-        {% endblock %}      
+                    </ul>
+                </div>
+            </div>
+        </nav>
     </div>
-
-    {% bootstrap_javascript %}  
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
 </body>
 </html>
-

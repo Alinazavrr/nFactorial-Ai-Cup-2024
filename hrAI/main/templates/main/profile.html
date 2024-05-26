@@ -1,0 +1,22 @@
+{% extends 'layouts/navbar.html' %}
+{% load bootstrap5 %}
+
+{% block title %}Профиль{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Профиль</h2>
+    {% if custom_user.is_candidate %}
+        <h3>Резюме</h3>
+        <p>{{ candidate.resume.url }}</p>
+        <a href="{% url 'candidate-create' %}" class="btn btn-primary">Редактировать</a>
+    {% elif custom_user.is_company %}
+        <h3>Компания</h3>
+        <p>Название: {{ company.name }}</p>
+        <p>Описание: {{ company.description }}</p>
+        <p>Ценности: {{ company.culture_values }}</p>
+        <p>Веб-сайт: {{ company.website }}</p>
+        <a href="{% url 'company-create' %}" class="btn btn-primary">Редактировать</a>
+    {% endif %}
+</div>
+{% endblock %}
