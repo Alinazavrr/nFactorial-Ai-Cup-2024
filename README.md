@@ -3,9 +3,9 @@ Fork this repository and build nFactorial Ai Cup 2024 projects
 
 ## Alinazar
 
-## < Your App's Name >
+## Hier AI
 
-## < Your App's description, technical considerations, etc. >
+## CV reviewer который в планах превратить в очень полезный и мощный асситент для компаний для найма людей.
 
 
 ## Typeform to submit:
